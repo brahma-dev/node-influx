@@ -78,7 +78,12 @@ export class Schema {
 						throw new Error(`Expected numeric value for ${this._ref(field)}, but got '${value}'!`);
 					}
 
-					coerced = String(Math.floor(value as number)) + 'i';
+					if (typ === 'bigint') {
+						coerced = String(value) + 'i';
+					} else {
+						coerced = String(Math.floor(value as number)) + 'i';
+					}
+
 					break;
 
 				case FieldType.FLOAT:
